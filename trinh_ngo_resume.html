@@ -812,7 +812,205 @@
             </div>
         </div>
     </footer>
-    <script> // Centered sticky nav: set active link by section in view; smooth scroll honors reduced motion. (function(){ const links = Array.from(document.querySelectorAll('.local .pill')); const ids = links.map(a => a.getAttribute('data-target')); const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; // Click -> scroll links.forEach(a => { a.addEventListener('click', (e) => { const id = a.getAttribute('data-target'); const el = id && document.getElementById(id); if (!el) return; e.preventDefault(); el.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' }); }); }); // Observe section visibility for aria-current const map = new Map(ids.map(id => [id, links.find(a => a.getAttribute('data-target') === id)])); const io = new IntersectionObserver((entries) => { // choose the top-most intersecting section const visible = entries.filter(e => e.isIntersecting).sort((a,b)=>a.boundingClientRect.top - b.boundingClientRect.top)[0]; if (!visible) return; const id = visible.target.getAttribute('id'); links.forEach(l => l.removeAttribute('aria-current')); const link = id && map.get(id); if (link) link.setAttribute('aria-current','page'); }, { rootMargin:'-50% 0px -45% 0px', threshold:0.01 }); ids.forEach(id => { const el = id && document.getElementById(id); if (el) io.observe(el); }); // Set initial state const first = document.getElementById(ids[0]); if (first && window.scrollY < first.getBoundingClientRect().top + window.scrollY + 1) { const link = map.get(ids[0]); if (link) link.setAttribute('aria-current','page'); } })(); </script>
+    <script>
+        // Enhanced navigation with liquid animations and scroll effects
+        (function() {
+            const links = Array.from(document.querySelectorAll('.local .pill'));
+            const ids = links.map(a => a.getAttribute('data-target'));
+            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            // Smooth scroll with spring animation
+            links.forEach(a => {
+                a.addEventListener('click', (e) => {
+                    const id = a.getAttribute('data-target');
+                    const el = id && document.getElementById(id);
+                    if (!el) return;
+                    e.preventDefault();
+
+                    // Add liquid ripple effect
+                    createRipple(e, a);
+
+                    el.scrollIntoView({
+                        behavior: prefersReduced ? 'auto' : 'smooth',
+                        block: 'start'
+                    });
+                });
+            });
+
+            // Intersection Observer for active states
+            const map = new Map(ids.map(id => [id, links.find(a => a.getAttribute('data-target') === id)]));
+            const io = new IntersectionObserver((entries) => {
+                const visible = entries.filter(e => e.isIntersecting)
+                    .sort((a,b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+                if (!visible) return;
+
+                const id = visible.target.getAttribute('id');
+                links.forEach(l => l.removeAttribute('aria-current'));
+                const link = id && map.get(id);
+                if (link) link.setAttribute('aria-current','page');
+            }, { rootMargin:'-50% 0px -45% 0px', threshold:0.01 });
+
+            ids.forEach(id => {
+                const el = id && document.getElementById(id);
+                if (el) io.observe(el);
+            });
+
+            // Initial state
+            const first = document.getElementById(ids[0]);
+            if (first && window.scrollY < first.getBoundingClientRect().top + window.scrollY + 1) {
+                const link = map.get(ids[0]);
+                if (link) link.setAttribute('aria-current','page');
+            }
+
+            // Liquid ripple effect function
+            function createRipple(event, element) {
+                const circle = document.createElement('span');
+                const diameter = Math.max(element.clientWidth, element.clientHeight);
+                const radius = diameter / 2;
+                const rect = element.getBoundingClientRect();
+
+                circle.style.width = circle.style.height = `${diameter}px`;
+                circle.style.left = `${event.clientX - rect.left - radius}px`;
+                circle.style.top = `${event.clientY - rect.top - radius}px`;
+                circle.style.position = 'absolute';
+                circle.style.borderRadius = '50%';
+                circle.style.background = 'rgba(255, 255, 255, 0.4)';
+                circle.style.transform = 'scale(0)';
+                circle.style.animation = 'ripple 0.6s linear';
+                circle.style.pointerEvents = 'none';
+
+                const rippleContainer = element.querySelector('.ripple') || element;
+                rippleContainer.appendChild(circle);
+
+                setTimeout(() => {
+                    circle.remove();
+                }, 600);
+            }
+
+            // Add CSS for ripple animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes ripple {
+                    to {
+                        transform: scale(2);
+                        opacity: 0;
+                    }
+                }
+                .pill { position: relative; overflow: hidden; }
+            `;
+            document.head.appendChild(style);
+
+            // Scroll reveal animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const scrollObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('scroll-reveal');
+                        entry.target.style.animationDelay = Math.random() * 0.3 + 's';
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, 100);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for scroll reveal
+            document.querySelectorAll('.card, .job, section').forEach(el => {
+                el.classList.add('scroll-reveal');
+                scrollObserver.observe(el);
+            });
+
+            // Parallax effect for hero background
+            let ticking = false;
+            function updateParallax() {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * -0.3;
+                const hero = document.querySelector('.hero');
+                if (hero) {
+                    hero.style.transform = `translateY(${rate}px)`;
+                }
+                ticking = false;
+            }
+
+            function requestTick() {
+                if (!ticking && !prefersReduced) {
+                    requestAnimationFrame(updateParallax);
+                    ticking = true;
+                }
+            }
+
+            window.addEventListener('scroll', requestTick);
+
+            // Magnetic effect for interactive elements
+            function addMagneticEffect(selector) {
+                document.querySelectorAll(selector).forEach(el => {
+                    el.addEventListener('mousemove', (e) => {
+                        if (prefersReduced) return;
+
+                        const rect = el.getBoundingClientRect();
+                        const x = e.clientX - rect.left - rect.width / 2;
+                        const y = e.clientY - rect.top - rect.height / 2;
+
+                        el.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px) scale(1.02)`;
+                    });
+
+                    el.addEventListener('mouseleave', () => {
+                        el.style.transform = '';
+                    });
+                });
+            }
+
+            // Apply magnetic effect to buttons and cards
+            addMagneticEffect('.btn');
+            addMagneticEffect('.pill');
+
+            // Floating animation for glass elements
+            function addFloatingAnimation() {
+                const floatingElements = document.querySelectorAll('.card, .job');
+                floatingElements.forEach((el, index) => {
+                    if (prefersReduced) return;
+
+                    el.style.animation = `float 6s ease-in-out infinite`;
+                    el.style.animationDelay = `${index * 0.5}s`;
+                });
+            }
+
+            // Add floating keyframes
+            const floatingStyle = document.createElement('style');
+            floatingStyle.textContent = `
+                @keyframes float {
+                    0%, 100% { transform: translateY(0px) rotateX(0deg); }
+                    50% { transform: translateY(-10px) rotateX(1deg); }
+                }
+            `;
+            document.head.appendChild(floatingStyle);
+
+            // Initialize floating animation
+            setTimeout(addFloatingAnimation, 1000);
+
+            // Dynamic background based on scroll position
+            function updateBackgroundGradient() {
+                const scrollPercent = window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight);
+                const hue1 = 210 + (scrollPercent * 60); // Blue to purple range
+                const hue2 = 260 + (scrollPercent * 40); // Purple to pink range
+
+                document.documentElement.style.setProperty('--bg',
+                    `linear-gradient(135deg, hsl(${hue1}, 30%, 95%) 0%, hsl(${hue2}, 25%, 85%) 100%)`
+                );
+            }
+
+            window.addEventListener('scroll', () => {
+                if (!prefersReduced) {
+                    requestAnimationFrame(updateBackgroundGradient);
+                }
+            });
+
+        })();
+    </script>
 </body>
 
 </html>
