@@ -10,17 +10,23 @@
     <style>
         :root {
             --ink: #1d1d1f;
-            /* primary text */
             --sub: #6e6e73;
-            /* secondary text */
-            --bg: #ffffff;
-            /* background */
-            --line: #d2d2d7;
-            /* hairline */
+            --bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --bg-alt: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --line: rgba(210, 210, 215, 0.3);
+            --glass: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --shadow: rgba(31, 38, 135, 0.37);
             --max: 980px;
-            /* content width */
-            --radius: 18px;
-            /* card corners */
+            --radius: 24px;
+            --radius-lg: 32px;
+            --spacing-xs: 8px;
+            --spacing-s: 16px;
+            --spacing-m: 24px;
+            --spacing-l: 32px;
+            --spacing-xl: 48px;
+            --animation-spring: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            --animation-smooth: cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -29,11 +35,6 @@
                 transition: none !important;
                 scroll-behavior: auto !important
             }
-        }
-
-        html,
-        body {
-            height: 100%
         }
 
         html {
@@ -51,9 +52,41 @@
             margin: 0;
             background: var(--bg);
             color: var(--ink);
-            font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial;
+            font: 16px/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 25% 25%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(255, 154, 158, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(67, 206, 162, 0.05) 0%, transparent 50%);
+            z-index: -2;
+            animation: backgroundFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundFloat {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.8;
+            }
+            33% {
+                transform: translate(-10px, -10px) scale(1.02);
+                opacity: 0.6;
+            }
+            66% {
+                transform: translate(10px, 5px) scale(0.98);
+                opacity: 1;
+            }
         }
 
         a {
@@ -454,4 +487,4 @@
     <script> // Centered sticky nav: set active link by section in view; smooth scroll honors reduced motion. (function(){ const links = Array.from(document.querySelectorAll('.local .pill')); const ids = links.map(a => a.getAttribute('data-target')); const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; // Click -> scroll links.forEach(a => { a.addEventListener('click', (e) => { const id = a.getAttribute('data-target'); const el = id && document.getElementById(id); if (!el) return; e.preventDefault(); el.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' }); }); }); // Observe section visibility for aria-current const map = new Map(ids.map(id => [id, links.find(a => a.getAttribute('data-target') === id)])); const io = new IntersectionObserver((entries) => { // choose the top-most intersecting section const visible = entries.filter(e => e.isIntersecting).sort((a,b)=>a.boundingClientRect.top - b.boundingClientRect.top)[0]; if (!visible) return; const id = visible.target.getAttribute('id'); links.forEach(l => l.removeAttribute('aria-current')); const link = id && map.get(id); if (link) link.setAttribute('aria-current','page'); }, { rootMargin:'-50% 0px -45% 0px', threshold:0.01 }); ids.forEach(id => { const el = id && document.getElementById(id); if (el) io.observe(el); }); // Set initial state const first = document.getElementById(ids[0]); if (first && window.scrollY < first.getBoundingClientRect().top + window.scrollY + 1) { const link = map.get(ids[0]); if (link) link.setAttribute('aria-current','page'); } })(); </script>
 </body>
 
-</html> 
+</html>
