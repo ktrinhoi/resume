@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinh Ngo - Strategic Portfolio Retention Growth</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/><circle cx="20" cy="30" r="1" fill="white" opacity="0.05"/><circle cx="80" cy="20" r="1.5" fill="white" opacity="0.08"/></svg>');
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .hero-content {
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 8rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, #cccccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+            animation: slideUp 1s ease-out;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1.2rem, 3vw, 2.5rem);
+            font-weight: 300;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            animation: slideUp 1s ease-out 0.2s both;
+        }
+
+        .hero .contact {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            animation: slideUp 1s ease-out 0.4s both;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-item:hover {
+            opacity: 1;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 6vw, 6rem);
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 4rem;
+            background: linear-gradient(45deg, #ffffff, #999999);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        /* Executive Summary */
+        .summary {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            padding: 3rem;
+            margin: 4rem 0;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .summary p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            text-align: center;
+            opacity: 0.9;
+        }
+
+        /* Experience Cards */
+        .experience-grid {
+            display: grid;
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .job-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 25px;
+            padding: 3rem;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .job-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .job-card:hover::before {
+            left: 100%;
+        }
+
+        .job-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .job-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .company {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #cccccc;
+            margin-bottom: 0.5rem;
+        }
+
+        .duration {
+            font-size: 1rem;
+            color: #999999;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+        }
+
+        .achievements {
+            list-style: none;
+        }
+
+        .achievements li {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .achievements li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.7rem;
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(45deg, #ffffff, #cccccc);
+            border-radius: 50%;
+        }
+
+        .award {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Education Section */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .education-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .education-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .degree {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .school {
+            font-size: 1.2rem;
+            color: #cccccc;
+            margin-bottom: 0.5rem;
+        }
+
+        .year {
+            font-size: 1rem;
+            color: #999999;
+            margin-bottom: 1rem;
+        }
+
+        .coursework {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .skill-category h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* CTA Section */
+        .cta {
+            text-align: center;
+            padding: 5rem 0;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ffffff, #cccccc);
+            color: #000000;
+            padding: 1rem 3rem;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin: 1rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero .contact {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .job-header {
+                flex-direction: column;
+            }
+            
+            .education-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Trinh Ngo</h1>
+                <p class="subtitle">Strategic Portfolio Retention Growth</p>
+                <div class="contact">
+                    <div class="contact-item">
+                        <span>📞</span>
+                        <span>(+84) 394821870</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>✉️</span>
+                        <span>kieutrinh.ngo.work@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>📍</span>
+                        <span>Hanoi / HCMC, D7</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Executive Summary -->
+    <section class="section">
+        <div class="container">
+            <div class="summary animate-on-scroll">
+                <p>Product and retention growth specialist in fintech, with proven success scaling TPBank EVO’s credit card portfolio through data-driven strategy, customer segmentation, and agile execution. Skilled in campaign design, onboarding, and AI-driven CRM. Known for bridging product, marketing, and data to deliver scalable solutions, boost early activation, and drive measurable impact across channels.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience-grid">
+                <div class="job-card animate-on-scroll">
+                    <div class="job-header">
+                        <div>
+                            <div class="company">TRUSTING SOCIAL | TPBank</div>
+                            <div class="job-title">EVO Portfolio & Campaign Management</div>
+                        </div>
+                        <div class="duration">Jun 2024 – Present</div>
+                    </div>
+                    <ul class="achievements">
+                        <li>Implemented EMOB activation programs that achieved a <strong>97% activation rate</strong> in the first month for new cardholders (up from a baseline of ~45%), involved multi-channel education campaigns, in-app tutorials, and spending nudges.</li>
+                        <li>Scaled a new credit card portfolio segmentation through data-driven strategy using advanced segmentation (RFM modeling, spend patterns) for TPBank's EVO credit card partnership.</li>
+                        <li>Executed high-impact CRM and loyalty campaigns with Gen-AI human-like agents, driving a monthly spend uplift of over <strong>30 billion VND</strong> (~$1.25M) in the portfolio.</li>
+                        <li>Introduced AI-driven sales enablement with auto-transcription and tone analysis tools for call agents, improving conversion rates and data quality.</li>
+                    </ul>
+                    <div class="award">🌟 Rising Star of The Year Award</div>
+                </div>
+
+                <div class="job-card animate-on-scroll">
+                    <div class="job-header">
+                        <div>
+                            <div class="company">SEEDCOM GROUP</div>
+                            <div class="job-title">Assistant to VP of Marketing</div>
+                        </div>
+                        <div class="duration">Jun 2022 - Jun 2024</div>
+                    </div>
+                    <ul class="achievements">
+                        <li>Spearheaded go-to-market strategies for <strong>14+ product lines</strong>, ensuring 100%+ revenue targets for 4 consecutive quarters through integrated online/offline channel coordination.</li>
+                        <li>Optimized pricing and promotions with data analysis, leading to <strong>40% growth in profit</strong> while maintaining >50% gross margins.</li>
+                        <li>Managed large-scale campaigns including TikTok #LearnOnTikTok with 500+ KOLs/KOCs, resulting in <strong>70% increase</strong> in Facebook reach and <strong>48% increase</strong> in TikTok followers.</li>
+                        <li>Improved marketing cost-to-income ratio from 10% down to <strong>7%</strong> through strategic budget reallocation.</li>
+                        <li>Enhanced customer loyalty programs, increasing conversion rates by <strong>53%</strong> in Q1 2024.</li>
+                    </ul>
+                </div>
+
+                <div class="job-card animate-on-scroll">
+                    <div class="job-header">
+                        <div>
+                            <div class="company">ANYMIND VIETNAM, ADASIA</div>
+                            <div class="job-title">Strategist</div>
+                        </div>
+                        <div class="duration">Mar 2021 – May 2022</div>
+                    </div>
+                    <ul class="achievements">
+                        <li>Developed comprehensive social media and influencer marketing strategies for clients across FMCG, retail, and tech sectors.</li>
+                        <li>Consulted multinational clients on brand positioning and competitive strategy, achieving a <strong>65% win rate</strong> on 50+ project pitches.</li>
+                        <li><strong>Major Clients:</strong> Hoa Phat, Nestlé, Nivea, Grab, Cake by VP Bank, Uniqlo.</li>
+                    </ul>
+                    <div class="award">🏆 MVP of the Month Award</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="education-grid">
+                <div class="education-card animate-on-scroll">
+                    <div class="degree">Master of Finance and Banking</div>
+                    <div class="school">University of Banking, Ho Chi Minh City (HUB)</div>
+                    <div class="year">2025 – 2027</div>
+                    <div class="coursework">
+                        <strong>Concentration:</strong> Finance, Banking, and Fintech<br>
+                        <strong>Relevant coursework:</strong> Data Science in Finance, Fintech & AI, Financial Investment & Portfolio Management, Financial Derivatives, Blockchain, Machine Learning in Finance
+                    </div>
+                </div>
+                <div class="education-card animate-on-scroll">
+                    <div class="degree">Bachelor of Arts (Hons) in Marketing Management</div>
+                    <div class="school">British University Vietnam – Awarded by Staffordshire University, UK</div>
+                    <div class="year">2019 – 2022</div>
+                    <div class="coursework">
+                        <strong>Honors:</strong> Dean's Scholarship (2019), Dean's Award for Academic Excellence (2020)<br>
+                        <strong>Relevant coursework:</strong> Brand Management, Consumer Behavior, Experiential Marketing, Marketing Campaigns, Digital Marketing Strategy, Big Data
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category animate-on-scroll">
+                    <h3>Languages</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Vietnamese (Native)</span>
+                        <span class="skill-tag">English (Professional C1)</span>
+                        <span class="skill-tag">Korean (Beginner)</span>
+                        <span class="skill-tag">Chinese (Beginner)</span>
+                    </div>
+                </div>
+                <div class="skill-category animate-on-scroll">
+                    <h3>Technical Tools</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Google Apps Script</span>
+                        <span class="skill-tag">Looker Studio</span>
+                        <span class="skill-tag">CRM Systems</span>
+                        <span class="skill-tag">Zalo</span>
+                        <span class="skill-tag">Campaign Engines</span>
+                    </div>
+                </div>
+                <div class="skill-category animate-on-scroll">
+                    <h3>AI & Analytics</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">AI-driven Conversation Scripting</span>
+                        <span class="skill-tag">Auto-transcription</span>
+                        <span class="skill-tag">Tone Detection</span>
+                        <span class="skill-tag">RFM Modeling</span>
+                        <span class="skill-tag">Behavioral Segmentation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2 class="section-title">Let's Connect</h2>
+            <a href="mailto:kieutrinh.ngo.work@gmail.com" class="cta-button">Get in Touch</a>
+            <a href="tel:+84394821870" class="cta-button">Call Now</a>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add smooth scrolling to CTA buttons
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
