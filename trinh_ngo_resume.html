@@ -1,208 +1,457 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Trinh Ngo — Strategic Portfolio Retention Growth</title>
-  <meta name="description" content="Résumé of Trinh Ngo — Strategic Portfolio Retention Growth" />
-  <style>
-    /* Apple Card–inspired layout: calm, roomy, typographic, minimal motion */
-    :root{
-      --ink:#1d1d1f;        /* Apple body text */
-      --sub:#6e6e73;        /* Apple secondary */
-      --bg:#fff;
-      --line:#d2d2d7;       /* Apple hairline */
-      --max:980px;          /* content width */
-      --radius:18px;
-    }
-    @media (prefers-reduced-motion: reduce){ *{animation:none!important;transition:none!important;scroll-behavior:auto!important;} }
-    html,body{height:100%}
-    html{box-sizing:border-box}
-    *,*:before,*:after{box-sizing:inherit}
-    body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial}
-    a{color:inherit}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Trinh Ngo — Resume</title>
+    <meta name="description"
+        content="Single-file résumé of Trinh Ngo styled in the spirit of Apple Card layout patterns." />
+    <style>
+        :root {
+            --ink: #1d1d1f;
+            /* primary text */
+            --sub: #6e6e73;
+            /* secondary text */
+            --bg: #ffffff;
+            /* background */
+            --line: #d2d2d7;
+            /* hairline */
+            --max: 980px;
+            /* content width */
+            --radius: 18px;
+            /* card corners */
+        }
 
-    /* Top global spacing */
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important
+            }
+        }
 
-    /* Local nav like Apple Card: slim, centered, sticky */
-    .local{position:sticky;top:0;background:rgba(255,255,255,.86);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line);z-index:10}
-    .local .inner{display:flex;gap:14px;justify-content:center;align-items:center;min-height:44px}
-    .local a{display:inline-block;padding:6px 10px;border-radius:980px;text-decoration:none;color:var(--ink);opacity:.8}
-    .local a[aria-current="true"],.local a:hover{opacity:1;outline:1px solid var(--line)}
+        html,
+        body {
+            height: 100%
+        }
 
-    /* Hero */
-    header.hero{padding:56px 0 28px;text-align:center}
-    .eyebrow{font-size:14px;color:var(--sub);letter-spacing:.02em;margin-bottom:6px}
-    h1{font-size:clamp(40px,6vw,72px);line-height:1.05;letter-spacing:-.01em;margin:0 0 10px}
-    .subtitle{font-size:clamp(18px,2.6vw,24px);color:var(--sub);margin:0 0 22px}
-    .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-    .btn{appearance:none;border:1px solid var(--line);background:#fff;border-radius:980px;padding:10px 16px;cursor:pointer}
-    .btn:hover{box-shadow:0 1px 2px rgba(0,0,0,.06)}
+        html {
+            box-sizing: border-box;
+            scroll-behavior: smooth
+        }
 
-    /* Sections */
-    main{display:block}
-    section{padding:34px 0;border-top:1px solid var(--line)}
-    .section-title{font-size:28px;letter-spacing:-.01em;margin:0 0 14px}
-    .lede{color:var(--sub);font-size:18px}
+        *,
+        *::before,
+        *::after {
+            box-sizing: inherit
+        }
 
-    /* Cards are just soft containers */
-    .card{border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
 
-    /* Experience layout */
-    .xp{display:grid;gap:22px}
-    .job{border-top:1px solid var(--line);padding-top:18px}
-    .job:first-child{border-top:0;padding-top:0}
-    .jobhead{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap}
-    .title{font-weight:600}
-    .company{color:var(--sub)}
-    .time{color:var(--sub);font-variant-numeric:tabular-nums}
-    .bullets{margin:10px 0 0}
-    .bullets li{margin:6px 0}
+        a {
+            color: inherit;
+            text-decoration: none
+        }
 
-    /* Skills */
-    .pill{display:inline-block;padding:6px 10px;border:1px solid var(--line);border-radius:999px;margin:6px 6px 0 0}
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--ink);
+            outline-offset: 2px
+        }
 
-    /* Footer contact — simple and quiet */
-    footer{padding:40px 0;color:var(--sub);text-align:center;border-top:1px solid var(--line)}
+        .wrap {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 0 22px
+        }
 
-    @media print{.local,.cta{display:none}.card{border-color:#000}a[href]:after{content:" (" attr(href) ")"}}
-  </style>
+        /* Sticky local nav (Apple-style) */
+        .local {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(255, 255, 255, .9);
+            backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .local .inner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
+            min-height: 44px
+        }
+
+        .pill {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 980px;
+            font-size: 14px;
+            color: rgba(0, 0, 0, .6);
+        }
+
+        .pill[aria-current="page"],
+        .pill:hover {
+            color: #000;
+            background: rgba(0, 0, 0, .05);
+            outline: 1px solid rgba(0, 0, 0, .1);
+        }
+
+        /* Hero */
+        header.hero {
+            padding: 56px 0 28px;
+            text-align: center
+        }
+
+        .eyebrow {
+            font-size: 14px;
+            color: var(--sub);
+            letter-spacing: .02em;
+            margin-bottom: 6px;
+            text-transform: uppercase
+        }
+
+        h1 {
+            font-size: clamp(40px, 6vw, 72px);
+            line-height: 1.05;
+            letter-spacing: -.01em;
+            margin: 0 0 10px
+        }
+
+        .subtitle {
+            font-size: clamp(18px, 2.6vw, 24px);
+            color: var(--sub);
+            margin: 0 0 22px
+        }
+
+        .cta {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 10px
+        }
+
+        .btn {
+            appearance: none;
+            border: 1px solid rgba(0, 0, 0, .2);
+            background: #fff;
+            border-radius: 980px;
+            padding: 10px 16px;
+            cursor: pointer
+        }
+
+        .btn:hover {
+            background: rgba(0, 0, 0, .05)
+        }
+
+        /* Sections */
+        main {
+            display: block
+        }
+
+        section {
+            padding: 34px 0;
+            border-top: 1px solid var(--line);
+            scroll-margin-top: 90px
+        }
+
+        .section-title {
+            font-size: 28px;
+            letter-spacing: -.01em;
+            margin: 0 0 14px
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 18px
+        }
+
+        /* Experience structure */
+        .space-y-6>*+* {
+            margin-top: 24px
+        }
+
+        .job {
+            border-top: 1px solid var(--line);
+            padding-top: 20px
+        }
+
+        .job:first-child {
+            border-top: 0;
+            padding-top: 0
+        }
+
+        .jobhead {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 14px;
+            flex-wrap: wrap
+        }
+
+        .title {
+            font-weight: 600
+        }
+
+        .time {
+            color: var(--sub);
+            font-variant-numeric: tabular-nums
+        }
+
+        .bullets {
+            margin: 10px 0 0;
+            padding-left: 18px
+        }
+
+        .bullets li {
+            margin: 6px 0;
+            color: #000CC
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 40px 0;
+            color: var(--sub);
+            text-align: center
+        }
+
+        /* Print */
+        @media print {
+            html {
+                scroll-behavior: auto
+            }
+
+            .local,
+            .cta {
+                display: none !important
+            }
+
+            a[href]:after {
+                content: " (" attr(href) ")";
+                font-size: .9em
+            }
+
+            section {
+                break-inside: avoid
+            }
+
+            .card {
+                border-color: #000
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <nav class="local" aria-label="Sections">
-    <div class="inner wrap">
-      <a href="#summary" aria-current="true">Executive Summary</a>
-      <a href="#experience">Experience</a>
-      <a href="#education">Education</a>
-      <a href="#others">Others</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </nav>
-
-  <header class="hero wrap" id="overview">
-    <div class="eyebrow">Resume</div>
-    <h1>Trinh Ngo</h1>
-    <p class="subtitle">Product Retention Growth Strategist</p>
-    <div class="cta">
-      <a class="btn" href="mailto:kieutrinh.ngo.work@gmail.com">Email</a>
-      <a class="btn" href="tel:+84394821870">Call</a>
-    </div>
-    <p class="lede" style="margin-top:14px">Hanoi/ HCMC, D7</p>
-  </header>
-
-  <main class="wrap">
-    <!-- Overview / Summary -->
-    <section id="summary" aria-labelledby="summary-h">
-      <h2 id="summary-h" class="section-title">Executive Summary</h2>
-      <div class="card">
-        <p>Dynamic fintech and marketing strategist with over 4 years of proven expertise in driving significant revenue growth, strategic portfolio management, and performance optimization through data-driven insights and AI-powered innovations. Adept at cross-functional collaboration, budget planning, and delivering impactful results. Passionate about enhancing user engagement and operational efficiency within fast-paced, growth-focused environments.</p>
-      </div>
-    </section>
-
-    <!-- Experience -->
-    <section id="experience" aria-labelledby="exp-h">
-      <h2 id="exp-h" class="section-title">Experience</h2>
-      <div class="xp">
-        <article class="job">
-          <div class="jobhead">
-            <div>
-              <div class="title">TRUSTING SOCIAL | TPBank EVO Portfolio Insights &amp; Campaign Management</div>
+    <nav class="local" aria-label="Sections">
+        <div class="inner wrap"> <a class="pill" href="#summary" data-target="summary">Executive Summary</a> <a
+                class="pill" href="#experience" data-target="experience">Experience</a> <a class="pill"
+                href="#education" data-target="education">Education</a> <a class="pill" href="#others"
+                data-target="others">Others</a> <a class="pill" href="#contact" data-target="contact">Contact</a> </div>
+    </nav>
+    <header class="hero wrap" id="overview">
+        <div class="eyebrow">Resume</div>
+        <h1>Trinh Ngo</h1>
+        <p class="subtitle">Product Retention Growth Strategist</p>
+        <div class="cta"> <a class="btn" href="mailto:kieutrinh.ngo.work@gmail.com">Email</a> <a class="btn"
+                href="tel:+84394821870">Call</a> </div>
+        <p style="color:var(--sub)">Hanoi/ HCMC, D7</p>
+    </header>
+    <main class="wrap"> <!-- Executive Summary -->
+        <section id="summary" aria-labelledby="summary-h">
+            <h2 id="summary-h" class="section-title">Executive Summary</h2>
+            <div class="card">
+                <p>Dynamic fintech and marketing strategist with over 4 years of proven expertise in driving significant
+                    revenue growth, strategic portfolio management, and performance optimization through data-driven
+                    insights and AI-powered innovations. Adept at cross-functional collaboration, budget planning, and
+                    delivering impactful results. Passionate about enhancing user engagement and operational efficiency
+                    within fast-paced, growth-focused environments.</p>
             </div>
-            <div class="time">Jun 2024 – Present</div>
-          </div>
-          <ul class="bullets">
-            <li>Implemented EMOB activation programs: Built onboarding model based on cohort analysis, increasing first 30-day card usage to 97% vs 45% baseline, involved multi-channel education campaigns, in-app tutorials, and spending nudges from ideation, hypothesis to MVP and feedback to form usage habits immediately.</li>
-            <li>Scaled a new credit card portfolio segmentation through data-driven strategy: conducting behavioral research and using advanced segmentation (e.g. spend patterns, credit limits, RFM modeling) for TPBank’s EVO credit card (a digital-first card partnership) to tailor value propositions.</li>
-            <li>Revenue Growth via AI &amp; CRM: Led Gen-AI-driven CRM campaigns, enhancing personalized user outreach via telesales and Zalo, driving monthly spending uplift exceeding 30 billion VND (~$1.25M).</li>
-            <li>Sales Enablement Innovation: Implemented AI-powered sales tools (auto-transcription, tone analysis) that significantly improved sales conversion rates and provided robust data for continuous improvement and training.</li>
-            <li>Award: “Rising Star of The Year” award.</li>
-          </ul>
-        </article>
+        </section>
 
-        <article class="job">
-          <div class="jobhead">
-            <div>
-              <div class="title">SEEDCOM GROUP | Assistant to the VP of Marketing, promoted from MKT Specialist</div>
+        <!-- Experience -->
+        <section id="experience" aria-labelledby="exp-h">
+            <h2 id="exp-h" class="section-title">Experience</h2>
+            <div class="space-y-6">
+                <!-- Job 1 -->
+                <article class="job">
+                    <div class="jobhead">
+                        <div>
+                            <div class="title">TRUSTING SOCIAL | TPBank EVO Portfolio
+                                Insights &amp; Campaign Management</div>
+                        </div>
+                        <div class="time">Jun 2024 – Present</div>
+                    </div>
+                    <ul class="bullets">
+                        <li>Implemented EMOB activation programs: Built
+                            onboarding model based on cohort analysis,
+                            increasing first 30-day card usage to 97% vs
+                            45% baseline, involved multi-channel education
+                            campaigns, in-app tutorials, and spending
+                            nudges from ideation, hypothesis to MVP and
+                            feedback to form usage habits immediately.</li>
+                        <li>Scaled a new credit card portfolio
+                            segmentation through data-driven strategy:
+                            conducting behavioral research and using
+                            advanced segmentation (e.g. spend patterns,
+                            credit limits, RFM modeling) for TPBank's EVO
+                            credit card (a digital-first card partnership)
+                            to tailor value propositions.</li>
+                        <li>Revenue Growth via AI &amp; CRM: Led Gen-AI-driven
+                            CRM campaigns, enhancing personalized user
+                            outreach via telesales and Zalo, driving
+                            monthly spending uplift exceeding 30 billion
+                            VND (~$1.25M).</li>
+                        <li>Sales Enablement Innovation: Implemented
+                            AI-powered sales tools (auto-transcription,
+                            tone analysis) that significantly improved
+                            sales conversion rates and provided robust
+                            data for continuous improvement and training.</li>
+                        <li>Award: "Rising Star of The Year" award.</li>
+                    </ul>
+                </article>
+
+                <!-- Job 2 -->
+                <article class="job">
+                    <div class="jobhead">
+                        <div>
+                            <div class="title">SEEDCOM GROUP | Assistant to the VP of
+                                Marketing, promoted from MKT Specialist</div>
+                        </div>
+                        <div class="time">Jun 2022 - Jun 2024</div>
+                    </div>
+                    <ul class="bullets">
+                        <li>Strategic Product Launches: Directed
+                            go-to-market strategies for 14+ product lines,
+                            consistently achieving over 100% revenue
+                            targets across 4 consecutive quarters by
+                            integrating trade, digital marketing, events &
+                            partnerships.</li>
+                        <li>Optimized Pricing &amp; Profitability: Leveraged
+                            data analytics to adjust pricing and
+                            promotional strategies, resulting in a 40%
+                            profit growth while maintaining gross margins
+                            above 50%.</li>
+                        <li>Influencer &amp; Large-scale Campaigns: Managed
+                            impactful campaigns, including TikTok's
+                            #LearnOnTikTok initiative, coordinating over
+                            500 influencers, leading to a 70% increase in
+                            Facebook reach and a 48% increase in TikTok
+                            followers within one month.</li>
+                        <li>Enhanced Marketing Efficiency: Improved
+                            marketing cost-to-income ratio from 10% down
+                            to 7% by strategic budget reallocation
+                            focusing on profitability.</li>
+                        <li>Enhanced customer loyalty and lifecycle value:
+                            Designed retention programs (loyalty points,
+                            repeat purchase incentives, personalized
+                            message) that increased conversion rates by
+                            53% in Q1 2024.</li>
+                    </ul>
+                </article>
+
+                <!-- Job 3 -->
+                <article class="job">
+                    <div class="jobhead">
+                        <div>
+                            <div class="title">ANYMIND VIETNAM, ADASIA | Strategist</div>
+                        </div>
+                        <div class="time">Mar 2021 – May 2022</div>
+                    </div>
+                    <ul class="bullets">
+                        <li>Developed comprehensive social media and
+                            influencer marketing strategies for clients
+                            across FMCG, retail, and tech, aligning
+                            campaign plans with market research and data
+                            insights. Consulted multinational clients on
+                            brand positioning and competitive strategy,
+                            achieving a 65% win rate on 50+ project
+                            pitches.</li>
+                        <li>Major Clients: Hoa Phat, Nestlé, Nivea, Grab,
+                            Cake by VP Bank, Uniqlo.</li>
+                        <li>Award: MVP of the Month.</li>
+                    </ul>
+                </article>
             </div>
-            <div class="time">Jun 2022 - Jun 2024</div>
-          </div>
-          <ul class="bullets">
-            <li>Strategic Product Launches: Directed go-to-market strategies for 14+ product lines, consistently achieving over 100% revenue targets across 4 consecutive quarters by integrating trade, digital marketing, events &amp; partnerships.</li>
-            <li>Optimized Pricing &amp; Profitability: Leveraged data analytics to adjust pricing and promotional strategies, resulting in a 40% profit growth while maintaining gross margins above 50%.</li>
-            <li>Influencer &amp; Large-scale Campaigns: Managed impactful campaigns, including TikTok’s #LearnOnTikTok initiative, coordinating over 500 influencers, leading to a 70% increase in Facebook reach and a 48% increase in TikTok followers within one month.</li>
-            <li>Enhanced Marketing Efficiency: Improved marketing cost-to-income ratio from 10% down to 7% by strategic budget reallocation focusing on profitability.</li>
-            <li>Enhanced customer loyalty and lifecycle value: Designed retention programs (loyalty points, repeat purchase incentives, personalized message) that increased conversion rates by 53% in Q1 2024.</li>
-          </ul>
-        </article>
+        </section>
 
-        <article class="job">
-          <div class="jobhead">
-            <div>
-              <div class="title">ANYMIND VIETNAM, ADASIA | Strategist</div>
+        <!-- Education -->
+        <section id="education" aria-labelledby="edu-h">
+            <h2 id="edu-h" class="section-title">Education</h2>
+            <div class="card">
+                <div
+                    style="display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:12px">
+                    <div>
+                        <div class="title">Master of Finance and Banking – Concentration
+                            in Finance, Banking, and Fintech</div>
+                        <div style="color:var(--sub);margin-top:4px">University of Banking, Ho Chi Minh City (HUB)</div>
+                        <div style="color:var(--sub);font-size:14px;margin-top:4px">Relevant coursework: Data Science in
+                            Finance,
+                            Fintech &amp; AI, Financial Investment &amp; Portfolio
+                            Management, Financial Derivatives, Blockchain,
+                            Machine Learning in Finance</div>
+                    </div>
+                    <div class="time">2025 – 2027</div>
+                </div>
+                <div style="display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap">
+                    <div>
+                        <div class="title">Bachelor of Arts (Hons) in Marketing
+                            Management</div>
+                        <div style="color:var(--sub);margin-top:4px">British University Vietnam – Awarded by
+                            Staffordshire University, UK</div>
+                        <div style="color:var(--sub);font-size:14px;margin-top:4px">Honors: Dean's Scholarship (2019),
+                            Dean's
+                            Award for Academic Excellence (2020)</div>
+                        <div style="color:var(--sub);font-size:14px;margin-top:4px">Relevant coursework: Brand
+                            Management,
+                            Consumer Behavior, Experiential
+                            Marketing/Customer Experience, Marketing
+                            Campaigns, Digital Marketing Strategy, Big
+                            Data</div>
+                    </div>
+                    <div class="time">2019 – 2022</div>
+                </div>
             </div>
-            <div class="time">Mar 2021 – May 2022</div>
-          </div>
-          <ul class="bullets">
-            <li>Developed comprehensive social media and influencer marketing strategies for clients across FMCG, retail, and tech, aligning campaign plans with market research and data insights. Consulted multinational clients on brand positioning and competitive strategy, achieving a 65% win rate on 50+ project pitches.</li>
-            <li>Major Clients: Hoa Phat, Nestlé, Nivea, Grab, Cake by VP Bank, Uniqlo.</li>
-            <li>Award: MVP of the Month.</li>
-          </ul>
-        </article>
-      </div>
-    </section>
+        </section>
 
-    <!-- Skills -->
-    
+        <!-- Others -->
+        <section id="others" aria-labelledby="others-h">
+            <h2 id="others-h" class="section-title">Others</h2>
+            <div class="card">
+                <p><strong>Languages:</strong> • Vietnamese (Native)
+                    • English (Professional C1) • Korean &amp; Chinese
+                    (Beginner – actively learning)</p>
+                <p><strong>Technical Tools</strong> • SQL, Google
+                    Apps Script • BI Tools: Looker Studio • CRM &amp;
+                    Campaign Tools: Zalo, In-house CRM, Campaign
+                    Engines • AI + AGI Projects: AI-driven
+                    conversation scripting, auto-transcription, tone
+                    detection</p>
+            </div>
+        </section>
 
-    <!-- Education -->
-    <section id="education" aria-labelledby="edu-h">
-      <h2 id="edu-h" class="section-title">Education</h2>
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:12px">
-          <div>
-            <div class="title">Master of Finance and Banking – Concentration in Finance, Banking, and Fintech</div>
-            <div class="company">University of Banking, Ho Chi Minh City (HUB)</div>
-            <div class="company">Relevant coursework: Data Science in Finance, Fintech &amp; AI, Financial Investment &amp; Portfolio Management, Financial Derivatives, Blockchain, Machine Learning in Finance</div>
-          </div>
-          <div class="time">2025 – 2027</div>
+    </main> <!-- Footer Contact -->
+    <footer id="contact">
+        <div class="wrap">
+            <div>📞 <a href="tel:+84394821870">(+84) 394821870</a> · ✉️ <a
+                    href="mailto:kieutrinh.ngo.work@gmail.com">kieutrinh.ngo.work@gmail.com</a> · 📍 Hanoi / HCMC, D7
+            </div>
         </div>
-        <div style="display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap">
-          <div>
-            <div class="title">Bachelor of Arts (Hons) in Marketing Management</div>
-            <div class="company">British University Vietnam – Awarded by Staffordshire University, UK</div>
-            <div class="company">Honors: Dean’s Scholarship (2019), Dean’s Award for Academic Excellence (2020)</div>
-            <div class="company">Relevant coursework: Brand Management, Consumer Behavior, Experiential Marketing/Customer Experience, Marketing Campaigns, Digital Marketing Strategy, Big Data</div>
-          </div>
-          <div class="time">2019 – 2022</div>
-        </div>
-      </div>
-    </section>
-
-    <section id="others" aria-labelledby="others-h">
-      <h2 id="others-h" class="section-title">Others</h2>
-      <div class="card">
-        <p><strong>Languages:</strong> • Vietnamese (Native) • English (Professional C1) • Korean &amp; Chinese (Beginner – actively learning)</p>
-        <p><strong>Technical Tools</strong> • SQL, Google Apps Script • BI Tools: Looker Studio • CRM &amp; Campaign Tools: Zalo, In-house CRM, Campaign Engines • AI + AGI Projects: AI-driven conversation scripting, auto-transcription, tone detection</p>
-      </div>
-    </section>
-  </main>
-
-  <footer id="contact">
-    <div class="wrap">
-      <div>📞 <a href="tel:+84394821870">(+84) 394821870</a> &nbsp;·&nbsp; ✉️ <a href="mailto:kieutrinh.ngo.work@gmail.com">kieutrinh.ngo.work@gmail.com</a> &nbsp;·&nbsp; 📍 Hanoi / HCMC, D7</div>
-    </div>
-  </footer>
-
-  <script>
-    // Activate current link on scroll
-    const ids = ["summary","experience","education","others","contact"]; 
-    const links = Array.from(document.querySelectorAll('.local a'));
-    const map = new Map(ids.map(id=>[id, links.find(a=>a.getAttribute('href')==='#'+id)]));
-    const io = new IntersectionObserver(entries=>{
-      entries.forEach(e=>{ if(e.isIntersecting){ links.forEach(a=>a.removeAttribute('aria-current')); const L = map.get(e.target.id); if(L) L.setAttribute('aria-current','true'); } });
-    },{rootMargin:'-50% 0px -45% 0px',threshold:.01});
-    ids.forEach(id=>{ const el=document.getElementById(id); if(el) io.observe(el); });
-  </script>
+    </footer>
+    <script> // Centered sticky nav: set active link by section in view; smooth scroll honors reduced motion. (function(){ const links = Array.from(document.querySelectorAll('.local .pill')); const ids = links.map(a => a.getAttribute('data-target')); const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches; // Click -> scroll links.forEach(a => { a.addEventListener('click', (e) => { const id = a.getAttribute('data-target'); const el = id && document.getElementById(id); if (!el) return; e.preventDefault(); el.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' }); }); }); // Observe section visibility for aria-current const map = new Map(ids.map(id => [id, links.find(a => a.getAttribute('data-target') === id)])); const io = new IntersectionObserver((entries) => { // choose the top-most intersecting section const visible = entries.filter(e => e.isIntersecting).sort((a,b)=>a.boundingClientRect.top - b.boundingClientRect.top)[0]; if (!visible) return; const id = visible.target.getAttribute('id'); links.forEach(l => l.removeAttribute('aria-current')); const link = id && map.get(id); if (link) link.setAttribute('aria-current','page'); }, { rootMargin:'-50% 0px -45% 0px', threshold:0.01 }); ids.forEach(id => { const el = id && document.getElementById(id); if (el) io.observe(el); }); // Set initial state const first = document.getElementById(ids[0]); if (first && window.scrollY < first.getBoundingClientRect().top + window.scrollY + 1) { const link = map.get(ids[0]); if (link) link.setAttribute('aria-current','page'); } })(); </script>
 </body>
-</html>
+
+</html> ::contentReference[oaicite:0]{index=0}
