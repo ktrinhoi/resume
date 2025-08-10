@@ -11,22 +11,19 @@
         :root {
             --ink: #1d1d1f;
             --sub: #6e6e73;
-            --bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            --bg-alt: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --line: rgba(210, 210, 215, 0.3);
-            --glass: rgba(255, 255, 255, 0.25);
-            --glass-border: rgba(255, 255, 255, 0.18);
-            --shadow: rgba(31, 38, 135, 0.37);
+            --bg: #fbfbfd;
+            --surface: #ffffff;
+            --line: #d2d2d7;
             --max: 980px;
-            --radius: 24px;
-            --radius-lg: 32px;
+            --radius: 12px;
             --spacing-xs: 8px;
             --spacing-s: 16px;
             --spacing-m: 24px;
             --spacing-l: 32px;
             --spacing-xl: 48px;
-            --animation-spring: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            --animation-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --animation-ease: cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.04);
+            --shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -52,41 +49,9 @@
             margin: 0;
             background: var(--bg);
             color: var(--ink);
-            font: 16px/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font: 17px/1.47 -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            min-height: 100vh;
-            position: relative;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-                radial-gradient(circle at 25% 25%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(255, 154, 158, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(67, 206, 162, 0.05) 0%, transparent 50%);
-            z-index: -2;
-            animation: backgroundFloat 20s ease-in-out infinite;
-        }
-
-        @keyframes backgroundFloat {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-                opacity: 0.8;
-            }
-            33% {
-                transform: translate(-10px, -10px) scale(1.02);
-                opacity: 0.6;
-            }
-            66% {
-                transform: translate(10px, 5px) scale(0.98);
-                opacity: 1;
-            }
         }
 
         a {
