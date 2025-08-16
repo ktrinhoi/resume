@@ -135,9 +135,26 @@
         /* Skills as chips (no border) */
         .skills-grid { display: grid; gap: var(--space-md); }
         .skill-category { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
-        .skill-category strong { color: var(--ink); font-weight: 600; flex-basis: 100%; margin-bottom: var(--space-xs); font-size: 14px; }
+        .skill-category strong {
+          color: var(--ink); font-weight: 600; flex-basis: 100%;
+          margin-bottom: var(--space-xs); font-size: 14px;
+        }
         .skill-item { background: rgba(0,0,0,0.04); padding: var(--space-xs) var(--space-sm); border-radius: 980px; font-size: 14px; color: var(--ink); }
-
+        
+        .chip{
+  appearance:none; -webkit-appearance:none;     /* reset default button UI */
+  background: rgba(0,0,0,.04);                  /* no border, soft fill */
+  border: 0; box-shadow: none; margin: 0;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: 980px;                         /* “pill” */
+  font: inherit; font-size: 14px; line-height: 1.2;
+  color: var(--ink);
+  display: inline-flex; align-items: center; gap: 6px;
+  white-space: nowrap; cursor: default;
+}
+.chip[aria-disabled="true"]{ pointer-events:none; opacity:1; } /* keep visual weight */
+@media (hover:hover){ .chip:hover{ background: rgba(0,0,0,.06); } }
+.chip:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; border-radius: 12px; }
         /* Footer */
         footer { border-top: 1px solid var(--line); padding: var(--xl) 0; color: var(--sub); text-align: center }
         .footer-content { flex-direction: column; gap: var(--space-md); }
@@ -157,7 +174,7 @@
         }
 
         /* ================================ */
-        /* EXPERIENCE: Apple-careers reskin */
+        /* EXPERIENCE */
         /* (Scoped strictly under #experience) */
         /* ================================ */
         #experience .roles { display: grid; gap: 12px; }
@@ -435,7 +452,7 @@
                 </div>
             </div>
             <div style="margin-top: 18px; color: var(--sub); font-size: 14px;">
-                © 2025 Trinh Ngo — Product Retention Growth
+                © 2025 Trinh Ngo — Product Insight and Growth Strategist
             </div>
         </div>
     </footer>
